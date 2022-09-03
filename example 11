@@ -1,0 +1,79 @@
+/*11. Write a function dubbly_append(dlinked_list,element) to append an element into
+the doubly linked list.*/
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+class node{
+	public:
+		int data;
+		node* next;
+		node* prev;
+		node(int val){
+			data = val;
+			next=NULL;
+			prev=NULL;
+		}
+};
+void insertAtHead(node* &dlinked_list, int val){
+	node* n =new node(val);
+	n->next = dlinked_list;
+	if(dlinked_list!=NULL){
+	
+	dlinked_list->prev  = n;}
+	dlinked_list = n;
+}
+void addup(node* &dlinked_list, int val){
+	if(dlinked_list==NULL){
+		insertAtHead(dlinked_list, val);
+		return;
+	}
+	node* n = new node(val);
+	node* temp = dlinked_list;
+	while(temp->next!=NULL){
+		temp = temp->next;
+	}
+	temp->next=n;
+	n->prev = temp;
+}
+void dubbly_append(node* &dlinked_list, int val){
+	if(dlinked_list==NULL){
+		insertAtHead(dlinked_list, val);
+		return;
+	}
+	node* n = new node(val);
+	node* temp = dlinked_list;
+	while(temp->next!=NULL){
+		temp = temp->next;
+	}
+	temp->next=n;
+	n->prev = temp;}
+void display(node* linked_list){
+	node* temp = linked_list;
+		while(temp!=NULL){
+			if(temp->next==NULL){
+				cout<<temp->data;
+			}
+		else{
+		cout<<temp->data<<"<-->";
+	}
+		temp=temp->next;
+	}
+}
+int main(){
+	node* dlinked_list=NULL;
+	int val;
+	cout<<"Enter the which you append in:";
+	cin>>val;
+	addup(dlinked_list, 1);
+	addup(dlinked_list, 2);
+	addup(dlinked_list, 3);
+	addup(dlinked_list, 4);
+	cout<<"Before"<<endl;
+	display(dlinked_list);
+	dubbly_append(dlinked_list, val);
+	cout<<endl<<"After"<<endl;
+	display(dlinked_list);
+	return 0;
+}
+
